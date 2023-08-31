@@ -95,8 +95,6 @@ int deletar()
 	printf("Digite o cpf do usuário a ser deletado: ");
 	scanf("%s", cpf);
 	
-	remove(cpf); //deleta a especificação denominada 
-	
 	FILE *file;
 	file = fopen(cpf,"r");
 	
@@ -106,12 +104,19 @@ int deletar()
 		system("pause");
 	}
 	
-	while(fgets(cpf, 40, file) != NULL)
+else
 	{
-		printf("\nEsse cpf foi deletado com sucesso.\n");
-		printf("%s", cpf);
-		printf("\n\n");
+		fclose(file);
+		remove(cpf);
+		FILE *file;	
+		file = fopen(cpf,"r");
+		if(file == NULL)
+		{
+			printf("Usuário deletado com sucesso!.\n");
+			system("pause");
+		}
 	}
+fclose(file);
 	
 	system("pause");
 	
